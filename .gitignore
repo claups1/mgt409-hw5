@@ -1,0 +1,34 @@
+# Secrets: never commit the real key (.env.example is the template)
+.env
+.env.*
+!.env.example
+
+# Python virtual environments (mcp_server/.venv, backend/.venv, or one at the root)
+.venv/
+**/.venv/
+venv/
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Node / Vite
+node_modules/
+frontend/dist/
+dist/
+build/
+
+# Temp files written during atomic saves and SQLite journals
+*.tmp
+*.db-journal
+
+# Databases are normally ignored, but both project databases are part of the repo
+*.db
+!data/campus_customs.db
+!data/campus_customs_new.db
+
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

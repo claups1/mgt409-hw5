@@ -1,0 +1,271 @@
+{
+  "problem": "HW 5, Problem 9",
+  "database": "data/campus_customs_new.db (reset to the original before the runs)",
+  "shop_date": "2026-08-31",
+  "checking": {
+    "start": 3400.0,
+    "paid_out": 2664.0,
+    "end": 736.0,
+    "arithmetic": "3400.00 - 2664.00 = 736.00"
+  },
+  "tickets": [
+    {
+      "id": 101,
+      "type": "customer_order",
+      "requester": "Tauhid Zaman",
+      "subject": "Bulldog tee",
+      "final_status": "resolved",
+      "boss_decision": "needs_more_info",
+      "run_id": "20261013-234100-a90ec9",
+      "run_started": "2026-10-13T23:41:00-04:00",
+      "run_finished": "2026-10-13T23:41:09-04:00",
+      "outcome": "Resolved with the Boss marking it 'needs more info': offer the customer sizes M/L/XL at $28 (draft ready), and hold both money items (the $8 restock and the overdue $840 invoice 501) pending confirmation of the existing reprint and an owner cash plan. No money moved.",
+      "agents": [
+        {
+          "agent": "boss",
+          "asked_by": null,
+          "delegated_to": [
+            "inventory",
+            "accounting",
+            "customer_service"
+          ],
+          "mcp_tools": {
+            "review_customer_order": 1,
+            "get_shop_policy": 1
+          },
+          "contribution": "Reviewed the order, sent Inventory, Accounting, and Customer Service in parallel, and wrote the plan: send the reply, hold any new size-S restock until invoice 501's reprint is confirmed, and hold the $840 invoice for an owner cash decision."
+        },
+        {
+          "agent": "inventory",
+          "asked_by": "boss",
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "check_inventory": 1,
+            "list_vendors": 1,
+            "propose_restock": 1
+          },
+          "contribution": "Confirmed size S = 0 (M 5, L 3, XL 2) and flagged that open invoice 501 is a rush reprint of the same SKU and size, so a new restock could be a duplicate; checked a 1-unit restock ($8 estimate)."
+        },
+        {
+          "agent": "accounting",
+          "asked_by": "boss",
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "get_cash_position": 1,
+            "get_invoice": 1,
+            "get_shop_policy": 1,
+            "propose_payment": 1
+          },
+          "contribution": "Checked invoice 501 ($840, 3 days overdue): checking can cover it, but paying it plus the $2,400 rent would leave $160, below the $500 reserve; owner approval needed."
+        },
+        {
+          "agent": "customer_service",
+          "asked_by": "boss",
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "check_inventory": 4,
+            "propose_customer_reply": 1
+          },
+          "contribution": "Drafted a privacy-checked reply offering sizes M, L, or XL at $28 each."
+        }
+      ],
+      "human_approvals": [],
+      "prepared_but_not_approved": [
+        {
+          "approval_id": "AP-0035",
+          "type": "purchase",
+          "what": "restock",
+          "amount": 8.0,
+          "payee": "Bulldog Print Co",
+          "prepared_by": "inventory",
+          "approval_required_from": "staff",
+          "status": "pending"
+        },
+        {
+          "approval_id": "AP-0036",
+          "type": "payment",
+          "what": "invoice",
+          "amount": 840.0,
+          "payee": "Bulldog Print Co",
+          "prepared_by": "accounting",
+          "approval_required_from": "owner",
+          "status": "pending"
+        }
+      ],
+      "customer_reply_draft": "Hi Tauhid, size S is currently out of stock. We have the Classic Bulldog Tee in sizes M, L, and XL for $28 each. Let us know if one of those works for you."
+    },
+    {
+      "id": 102,
+      "type": "rent_notice",
+      "requester": "Elm City Properties",
+      "subject": "Rent due",
+      "final_status": "resolved",
+      "boss_decision": "ready_for_human_review",
+      "run_id": "20261013-234109-432a2d",
+      "run_started": "2026-10-13T23:41:09-04:00",
+      "run_finished": "2026-10-13T23:41:16-04:00",
+      "outcome": "Resolved: the owner approved the $2,400 Chapel Street rent from checking (payment #1); the lease's next due date moved to 2026-10-02. The overdue $840 invoice was held because paying both would break the $500 reserve.",
+      "agents": [
+        {
+          "agent": "boss",
+          "asked_by": null,
+          "delegated_to": [
+            "facilities",
+            "accounting"
+          ],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "review_rent_notice": 1,
+            "get_shop_policy": 1
+          },
+          "contribution": "Reviewed the rent notice, sent Facilities and Accounting in parallel, and recommended the owner approve the $2,400 rent while holding the overdue $840 invoice because of the cash reserve."
+        },
+        {
+          "agent": "accounting",
+          "asked_by": "boss",
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "get_lease": 1,
+            "get_cash_position": 1,
+            "get_shop_policy": 1,
+            "propose_payment": 1
+          },
+          "contribution": "Checked the $2,400 rent payment from checking: leaves $1,000 (or $160 if invoice 501 is also paid, below reserve); owner approval required."
+        },
+        {
+          "agent": "facilities",
+          "asked_by": "boss",
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "get_lease": 1,
+            "list_payments": 1
+          },
+          "contribution": "Confirmed the notice matches lease 1 (Elm City Properties, $2,400, due 2026-09-02, 2 days away), no rent recorded as paid, and no special lease terms."
+        }
+      ],
+      "human_approvals": [
+        {
+          "approval_id": "AP-0037",
+          "type": "payment",
+          "what": "rent",
+          "amount": 2400.0,
+          "payee": "Elm City Properties",
+          "prepared_by": "accounting",
+          "approval_required_from": "owner",
+          "approved_by": "Claudia",
+          "role": "owner",
+          "approved_at": "2026-10-13T23:43:17-04:00",
+          "payment_id": 1,
+          "payment_row": {
+            "id": 1,
+            "kind": "rent",
+            "ref_id": 1,
+            "amount": 2400.0,
+            "account": "checking",
+            "paid_at": "2026-08-31",
+            "approved_by": "Claudia (owner) [approval AP-0037]"
+          }
+        }
+      ],
+      "prepared_but_not_approved": [],
+      "customer_reply_draft": null
+    },
+    {
+      "id": 103,
+      "type": "price_override",
+      "requester": "Yale AI Club",
+      "subject": "Bulk hoodie discount",
+      "final_status": "resolved",
+      "boss_decision": "ready_for_human_review",
+      "run_id": "20261013-234117-f2aec3",
+      "run_started": "2026-10-13T23:41:17-04:00",
+      "run_finished": "2026-10-13T23:41:24-04:00",
+      "outcome": "Resolved: the owner approved the $264 restock of 12 navy size-M hoodies from Bulldog Print Co (payment #2, arriving ~2026-09-05). A 15% discount ($986 for 20) was recommended for staff sign-off; the reply offers the 8 in stock.",
+      "agents": [
+        {
+          "agent": "boss",
+          "asked_by": null,
+          "delegated_to": [
+            "inventory",
+            "accounting",
+            "customer_service"
+          ],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "review_bulk_order": 1,
+            "get_shop_policy": 1
+          },
+          "contribution": "Reviewed the bulk order, sent Inventory, Accounting, and Customer Service in parallel, and recommended staff approve a 12-unit restock and a 15% discount, with the reply draft for review."
+        },
+        {
+          "agent": "inventory",
+          "asked_by": "boss",
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "check_inventory": 2,
+            "list_vendors": 1,
+            "get_shop_policy": 1,
+            "propose_restock": 1
+          },
+          "contribution": "Confirmed 8 of 20 size-M hoodies on hand (12 short) and checked a 12-unit restock from Bulldog Print Co: $264 estimate, earliest arrival 2026-09-05, no duplicate invoice."
+        },
+        {
+          "agent": "accounting",
+          "asked_by": "boss",
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "get_pricing": 1,
+            "get_shop_policy": 1,
+            "propose_discount": 1
+          },
+          "contribution": "Checked a 15% discount (the agents' limit): $49.30 each, $986 for 20, $546 margin over the $440 cost; not below cost; staff approval."
+        },
+        {
+          "agent": "customer_service",
+          "asked_by": "boss",
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "check_inventory": 1,
+            "get_shop_policy": 1,
+            "propose_customer_reply": 1
+          },
+          "contribution": "Drafted a privacy-checked reply offering the 8 hoodies in stock at list price, with no promise about the other 12."
+        }
+      ],
+      "human_approvals": [
+        {
+          "approval_id": "AP-0038",
+          "type": "purchase",
+          "what": "restock",
+          "amount": 264.0,
+          "payee": "Bulldog Print Co",
+          "prepared_by": "inventory",
+          "approval_required_from": "staff",
+          "approved_by": "Claudia",
+          "role": "owner",
+          "approved_at": "2026-10-13T23:43:27-04:00",
+          "payment_id": 2,
+          "payment_row": {
+            "id": 2,
+            "kind": "restock",
+            "ref_id": 1,
+            "amount": 264.0,
+            "account": "checking",
+            "paid_at": "2026-08-31",
+            "approved_by": "Claudia (owner) [approval AP-0038]"
+          }
+        }
+      ],
+      "prepared_but_not_approved": [],
+      "customer_reply_draft": "Hi Yale AI Club, we currently have 8 navy hoodies in size M available at the listed price. We don’t have enough on hand for all 20 requested. Let us know if you’d like to proceed with the 8 available or discuss other options."
+    }
+  ]
+}

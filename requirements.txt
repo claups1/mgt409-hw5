@@ -1,0 +1,8 @@
+# Python packages for the MCP server (mcp_server/) and the FastAPI agent backend (backend/).
+# Tested with Python 3.14. Install into each folder's .venv (see README.md).
+fastmcp>=4.1                          # MCP server: mcp_server/mcp_server.py
+pydantic-ai-slim[openai,mcp]>=2.55    # the five agents (PydanticAI + MCP client)
+openai>=3.0                           # Portkey uses the OpenAI client
+python-dotenv>=1.0                    # reads PORTKEY_API_KEY from .env
+fastapi>=0.115                        # backend API: backend/main.py
+uvicorn[standard]>=0.30               # runs the backend: uvicorn main:app

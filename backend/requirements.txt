@@ -1,0 +1,2 @@
+# Same package list as the project root (paths in -r are relative to this file).
+-r ../requirements.txt
